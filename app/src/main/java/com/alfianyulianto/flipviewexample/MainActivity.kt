@@ -1,4 +1,4 @@
-package com.jackslabs.flipviewexample
+package com.alfianyulianto.flipviewexample
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.alfianyulianto.flippoview.FlippoView
+import com.jackslabs.flipviewexample.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

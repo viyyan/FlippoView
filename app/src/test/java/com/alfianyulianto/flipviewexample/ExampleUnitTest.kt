@@ -1,4 +1,4 @@
-package com.jackslabs.flipviewexample
+package com.alfianyulianto.flipviewexample
 
 import org.junit.Test
 

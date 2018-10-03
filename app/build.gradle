@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.jackslabs.flipviewexample"
+        applicationId 'com.alfianyulianto.flipviewexample'
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
@@ -19,6 +19,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
