@@ -5,6 +5,7 @@ import android.animation.AnimatorInflater
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.content.Context
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -35,8 +36,8 @@ class FlippoView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
     private var flipEnabled = true
     private var flipCloseReverse = false
 
-    val LEFT_SIDE = "left"
-    val RIGHT_SIDE = "right"
+    val LEFT_SIDE = resources.getString(R.string.left_side)
+    val RIGHT_SIDE = resources.getString(R.string.right_side)
 
     private var flipTypeFrom = LEFT_SIDE
 
@@ -47,20 +48,21 @@ class FlippoView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
 
     init {
 
-        val attrArray = context.obtainStyledAttributes(attrs, R.styleable.FlippoViewStyleable, 0,0 )
+        val attrArray = context.obtainStyledAttributes(attrs, R.styleable.FlippoViewStyleable)
 
-        try {
-            flipDuration = attrArray.getInt(R.styleable.FlippoViewStyleable_flipDuration, DEFAULT_FLIP_DURATION)
-            flipEnabled = attrArray.getBoolean(R.styleable.FlippoViewStyleable_flipEnabled, true)
-            flipCloseReverse = attrArray.getBoolean(R.styleable.FlippoViewStyleable_closeReverse, false)
-//            flipTypeFrom = attrArray.getString(R.styleable.FlippoViewStyleable_flipFrom)
-//
-//            if (TextUtils.isEmpty(flipTypeFrom)) {
-//                flipTypeFrom = "left"
-//            }
-        } finally {
-            attrArray.recycle()
+        val n = attrArray.indexCount
+        for (i in 0..n) {
+            val attr = attrArray.getIndex(i)
+            when (attr) {
+                R.styleable.FlippoViewStyleable_flipFrom -> flipTypeFrom = attrArray.getString(attr)
+                R.styleable.FlippoViewStyleable_flipDuration -> flipDuration = attrArray.getInt(attr, DEFAULT_FLIP_DURATION)
+                R.styleable.FlippoViewStyleable_flipEnabled -> flipEnabled = attrArray.getBoolean(attr, true)
+                R.styleable.FlippoViewStyleable_closeReverse -> flipCloseReverse = attrArray.getBoolean(attr, false)
+
+            }
         }
+
+        attrArray.recycle()
 
         loadAnimations()
     }
@@ -123,7 +125,7 @@ class FlippoView(context: Context, attrs: AttributeSet) : FrameLayout(context, a
     private fun setCameraDistance() {
         val distance = 4000
         val scale = resources.displayMetrics.density * distance
-
+        Log.d("scale", scale.toString())
         cardFrontView?.setCameraDistance(scale)
         cardBackView?.setCameraDistance(scale)
     }
